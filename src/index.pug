@@ -1,0 +1,111 @@
+doctype html
+html(lang="ru")
+	head
+		meta(charset="utf-8")
+		title Title page
+		meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+		meta(http-equiv="Content-Style-Type", content="text/css")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="keywords", content="")
+		meta(name="description", content="")
+		meta(meta name="viewport" content="width=device-width, initial-scale=1.0")
+		meta(name="format-detection" content="telephone=no")
+		link(rel="shortcut icon" href="img/favicon.png" type="image/png")
+		
+		//[if IE]> <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]
+		
+		link(href="css/libs.min.css", rel="stylesheet", type="text/css")
+		link(href="css/style.css", rel="stylesheet", type="text/css")
+
+	body
+		//  Шапка  
+		header.header
+			.container
+				.header__row
+					.header__toggle
+						button.toggle
+							span
+							span
+							span
+					.header__logo
+						.logo
+							img.logo__img(src="img/logo.png", alt="Логотип")
+					.header__center
+						h2.desc-2 Lorem ipsum dolor sit amet.
+					.header__right
+						.phone
+							a.phone__link(href="tel:88005553535") 8-800-555-35-35
+						.phone
+							a.btn1.phone__btn(href="#modal-call") Заказать звонок
+		//  /Шапка  
+
+		//  Навигация  
+		nav.navigation#top-menu
+			.container
+				ul.nav
+					- var menus = [{name:'Link 1', href:'#here1'}, {name:'Link 2', href:'#here2'}, {name:'Link 3', href:'#here3'}, {name:'Link 4', href:'#here4'}];
+					for menu in menus
+						li.nav__item
+							a.nav__link(href=""+menu.href+"") #{menu.name}
+		//  /Навигация  
+
+		.main-page
+			//  Первый экран  
+			section.top-screen
+				.container
+					h1.desc-1 Lorem ipsum dolor sit amet, consectetur adipisicing.
+
+					.top-screen__video
+						iframe(src="https://www.youtube.com/embed/1Nk8TlNxvTg" allowfullscreen)
+			//  /Первый экран  
+
+
+
+
+		//  Подвал  
+		footer.footer
+			.container
+				.footer__row
+					.footer__logo
+						.footer__text Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					.footer__center
+						.footer__text Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					.footer__right
+						.footer__text Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+		//  /Подвал  
+
+
+
+
+		//  Модальное окно Заказать звонок  
+		.modal.mfp-hide#modal-call
+			.form.form__modal
+				h3.form__desc Заказать звонок
+				form.form-box(action="send.php" method="post")
+					.form__box-input
+						input.form__input(type="text" name="name" placeholder="Ваше имя")
+					.form__box-input
+						input.form__input(type="email" name="email" placeholder="Ваш email*" title="youre@email.com" required)
+					.form__box-input
+						input.form__input(type="tel" name="phone" placeholder="Ваш телефон*" title="89012345678" pattern="^[0-9\\s\\(\\)\\+\\-]{1,18}$" required)
+					.form__box-submit
+						button.btn1.form__submit(type="submit" name="submit") Отправить
+						input(type="hidden" name="title" value="Заказать звонок")
+					.form__box-checkbox
+						input.form__checkbox(type="checkbox" name="agree" checked id="agree-1")
+						label.form__label-checkbox(for="agree-1") Отправляя заявку вы соглашаетесь с 
+							a.form__policy(href="#") Политикой конфиденциальности
+		//  /Модальное окно Заказать звонок  
+
+
+		//  Модальное окно Заявка отправлена  
+		.modal.mfp-hide#modal-thanks
+			.form.form__modal
+				h3.form__desc Заявка отправлена
+				h5.form__subdesc Мы свяжемся с Вами в ближайшее время
+		//  /Модальное окно Заявка отправлена  
+
+
+
+		script(src='js/libs.min.js')
+		script(src='js/custom.js')

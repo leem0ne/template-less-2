@@ -1,0 +1,78 @@
+/*  МОДАЛЬНОЕ ОКНО  */
+.modal{
+  position: relative;
+  width: 290px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px 20px;
+
+  .xxs-min({
+    width: 350px;
+  });
+}
+
+/*  ФОРМА  */
+.form{
+  &__modal{
+    text-align: center;
+  }
+  &__desc{
+    margin-bottom: 15px;
+    &:extend(.fz20);
+  }
+  &__box-input{
+    max-width: 400px;
+    margin: 0 auto 12px;
+  }
+  &__box-submit{
+    max-width: 400px;
+    margin: 0 auto 12px;
+  }
+  &__input{
+    width: 100%;
+    display: inline-block;
+    color: @color1;
+    padding: 7px 10px 8px;
+    border: 1px solid @color1;
+    background: #fff;
+    &:extend(.fz18);
+  }
+  &__submit{
+    width: 100%;
+    border: none;
+
+    &[disabled]{
+      background: darken(green, 10%);
+      cursor: not-allowed;
+    }
+  }
+  &__policy{
+    display: inline-block;
+  }
+  &__box-checkbox{
+    text-align: center;
+    margin-top: 20px;
+  }
+  &__checkbox{
+    display: none;
+
+    &:checked + .form__label-checkbox::before{
+      background: #000;
+    }
+  }
+  &__label-checkbox{
+    display: inline-block;
+    cursor: pointer;
+
+    &::before{
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1px solid;
+      box-shadow: inset 0 0 0 3px #fff;
+      margin-right: 7px;
+      background: #fff;
+    }
+  }
+}

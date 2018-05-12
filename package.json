@@ -1,0 +1,36 @@
+{
+  "name": "template-less-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "leem0ne",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.17.5",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^2.0.0",
+    "gulp-group-css-media-queries": "^1.2.0",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-less": "^3.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp.spritesmith": "^6.2.1",
+    "smart-grid": "^2.0.0"
+  },
+  "dependencies": {
+    "gsap": "^1.20.4",
+    "gulp-clean-css": "^3.9.3",
+    "jquery": "^3.3.1",
+    "magnific-popup": "^1.1.0",
+    "node-notifier": "^5.2.1",
+    "scrollmagic": "^2.0.5",
+    "slick-carousel": "^1.7.1",
+    "smooth-scrollbar": "^8.2.7"
+  },
+  "description": "My Template LESS and PUG"
+}

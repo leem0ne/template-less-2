@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Title page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <!--[if IE]> <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+    <link href="css/libs.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <!--  Шапка  -->
+    <header class="header">
+      <div class="container">
+        <div class="header__row">
+          <div class="header__toggle">
+            <button class="toggle"><span></span><span></span><span></span></button>
+          </div>
+          <div class="header__logo">
+            <div class="logo"><img class="logo__img" src="img/logo.png" alt="Логотип"></div>
+          </div>
+          <div class="header__center">
+            <h2 class="desc-2">Lorem ipsum dolor sit amet.</h2>
+          </div>
+          <div class="header__right">
+            <div class="phone"><a class="phone__link" href="tel:88005553535">8-800-555-35-35</a></div>
+            <div class="phone"><a class="btn1 phone__btn" href="#modal-call">Заказать звонок</a></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--  /Шапка  -->
+    <!--  Навигация  -->
+    <nav class="navigation" id="top-menu">
+      <div class="container">
+        <ul class="nav">
+          <li class="nav__item"><a class="nav__link" href="#here1">Link 1</a></li>
+          <li class="nav__item"><a class="nav__link" href="#here2">Link 2</a></li>
+          <li class="nav__item"><a class="nav__link" href="#here3">Link 3</a></li>
+          <li class="nav__item"><a class="nav__link" href="#here4">Link 4</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!--  /Навигация  -->
+    <div class="main-page">
+      <!--  Первый экран  -->
+      <section class="top-screen">
+        <div class="container">
+          <h1 class="desc-1">Lorem ipsum dolor sit amet, consectetur adipisicing.</h1>
+          <div class="top-screen__video">
+            <iframe src="https://www.youtube.com/embed/1Nk8TlNxvTg" allowfullscreen></iframe>
+          </div>
+        </div>
+      </section>
+      <!--  /Первый экран  -->
+    </div>
+    <!--  Подвал  -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__logo">
+            <div class="footer__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+          </div>
+          <div class="footer__center">
+            <div class="footer__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+          </div>
+          <div class="footer__right">
+            <div class="footer__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--  /Подвал  -->
+    <!--  Модальное окно Заказать звонок  -->
+    <div class="modal mfp-hide" id="modal-call">
+      <div class="form form__modal">
+        <h3 class="form__desc">Заказать звонок</h3>
+        <form class="form-box" action="send.php" method="post">
+          <div class="form__box-input">
+            <input class="form__input" type="text" name="name" placeholder="Ваше имя">
+          </div>
+          <div class="form__box-input">
+            <input class="form__input" type="email" name="email" placeholder="Ваш email*" title="youre@email.com" required>
+          </div>
+          <div class="form__box-input">
+            <input class="form__input" type="tel" name="phone" placeholder="Ваш телефон*" title="89012345678" pattern="^[0-9\s\(\)\+\-]{1,18}$" required>
+          </div>
+          <div class="form__box-submit">
+            <button class="btn1 form__submit" type="submit" name="submit">Отправить</button>
+            <input type="hidden" name="title" value="Заказать звонок">
+          </div>
+          <div class="form__box-checkbox">
+            <input class="form__checkbox" type="checkbox" name="agree" checked id="agree-1">
+            <label class="form__label-checkbox" for="agree-1">Отправляя заявку вы соглашаетесь с <a class="form__policy" href="#">Политикой конфиденциальности</a></label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--  /Модальное окно Заказать звонок  -->
+    <!--  Модальное окно Заявка отправлена  -->
+    <div class="modal mfp-hide" id="modal-thanks">
+      <div class="form form__modal">
+        <h3 class="form__desc">Заявка отправлена</h3>
+        <h5 class="form__subdesc">Мы свяжемся с Вами в ближайшее время</h5>
+      </div>
+    </div>
+    <!--  /Модальное окно Заявка отправлена  -->
+    <script src="js/libs.min.js"></script>
+    <script src="js/custom.js"></script>
+  </body>
+</html>
