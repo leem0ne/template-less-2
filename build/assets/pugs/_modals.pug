@@ -1,0 +1,35 @@
+//  Модальное окно Заказать звонок  
+.modal.lity-hide#modal-call
+	button.close.modal__close(type="button" data-lity-close)
+		svg(role="img")
+			use(xlink:href="img/svg/sprite.svg#close")
+	.modal__content
+		.form.form__modal
+			h3.form__desc Заказать звонок
+			form.form-box(action="send.php" method="post")
+				.form__box-input
+					input.form__input(type="text" name="name" placeholder="Ваше имя")
+				.form__box-input
+					input.form__input(type="email" name="email" placeholder="Ваш email*" title="youre@email.com" required)
+				.form__box-input
+					input.form__input(type="tel" name="phone" placeholder="Ваш телефон*" title="89012345678" pattern="^[0-9\\s\\(\\)\\+\\-]{1,18}$" required)
+				.form__box-submit
+					button.btn1.form__submit(type="submit" name="submit") Отправить
+					input(type="hidden" name="title" value="Заказать звонок")
+					input(type="hidden" name="orderfk" value="")
+				.form__box-checkbox
+					input.form__checkbox(type="checkbox" name="agree" checked id="agree-1")
+					label.form__label-checkbox(for="agree-1") Отправляя заявку вы соглашаетесь с 
+						a.form__policy(href="#") Политикой конфиденциальности
+//  /Модальное окно Заказать звонок  
+
+
+//  Модальное окно Заявка отправлена  
+.modal.lity-hide#modal-thanks
+	button.close.modal__close(type="button" data-lity-close)
+		svg(role="img")
+			use(xlink:href="img/svg/sprite.svg#close")
+	.modal__content
+		h3.form__desc Заявка отправлена
+		h5.form__subdesc Мы свяжемся с Вами в ближайшее время
+//  /Модальное окно Заявка отправлена  

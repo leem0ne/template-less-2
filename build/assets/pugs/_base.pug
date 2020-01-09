@@ -1,0 +1,38 @@
+block vars
+	- var phone = '+777777777777';
+	- var phone21 = "+7 (999) ";
+	- var phone22 = "999-99-99";
+	- var whatsapp = '8888888888888';
+	- var telegram = '9999999999999';
+	- var viber = '0000000000000';
+	- var pageTitle = 'Home';
+
+doctype html
+html(lang="ru")
+	head
+		meta(charset="utf-8")
+		title #{pageTitle}
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="keywords", content="")
+		meta(name="description", content="")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		meta(name="format-detection" content="telephone=no")
+		meta(name="robots" content="nofollow,noindex")
+		link(rel="shortcut icon" href="img/favicon.png" type="image/png")
+		
+		//[if IE]> <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]
+		
+		link(href="css/libs.min.css", rel="stylesheet", type="text/css")
+		link(href="css/style.css", rel="stylesheet", type="text/css")
+
+	body
+		block body
+
+
+		include _footer.pug
+		include _modals.pug
+
+
+		script(src='https://code.jquery.com/jquery-3.4.1.min.js')
+		script(src='js/libs.min.js')
+		script(src='js/custom.js')

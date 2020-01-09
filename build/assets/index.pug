@@ -1,0 +1,58 @@
+extends ./pugs/_base.pug
+
+block vars
+	- var pageTitle = 'Index sdf';
+
+block body
+	//  Навигация  
+	nav.nav#fix-menu
+		.container
+			include pugs/_menu.pug
+	//  /Навигация  
+
+	//  Шапка  
+	header.header
+		.container
+			.header__row
+				.header__toggle
+					button.toggle
+						span
+						span
+						span
+				.header__logo
+					.logo
+						a(href="#")
+							img.logo__img(src="img/logo.png", alt="Логотип")
+				.header__center
+					h2.desc-2 Далеко-далеко за словесными горами в стране.
+				.header__right
+					.phone
+						a.phone__link(href="tel:"+phone) #{phone21}
+							strong #{phone22}
+					.phone
+						a.btn1.phone__btn.js-modal-open(href="#modal-call") Заказать звонок
+	//  /Шапка  
+
+	.main-page
+		include pugs/_top.pug
+
+		.slider#slider
+			.slider__wrap.js-slider-wrap
+				div 1
+				div 2
+				div 3
+				div 1
+				div 2
+				div 3
+			.slider__control
+				a.slider__arrow.slider__arrow_prev.js-slider-prev(role="button") PREV
+				.slider__info
+					span.slider__curr.js-slider-curr 00
+					|  / 
+					span.slider__count.js-slider-count 10
+				a.slider__arrow.slider__arrow_next.js-slider-next(role="button") NEXT
+
+	
+
+
+	

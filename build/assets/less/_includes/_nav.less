@@ -1,0 +1,44 @@
+/*  НАВИГАЦИЯ  */
+.nav{
+  display: none;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 20px 0 20px;
+  background: #fff;
+  transform: translateY(-110%);
+  opacity: 0;
+  transition-duration: .5s;
+  transition-property: transform, opacity;
+
+  &_show{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (min-width: @w-xxs) {
+  .nav{}
+}
+
+
+@media screen and (min-width: @w-xs) {
+  .nav{}
+}
+
+
+@media screen and (min-width: @w-sm) {
+  .nav{}
+}
+
+
+@media screen and (min-width: @w-md) {
+  .nav{}
+}
+
+
+@media screen and (min-width: @w-lg) {
+  .nav{}
+}

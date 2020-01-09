@@ -1,164 +1,185 @@
-var gulp 				= require('gulp'),
-	less 				= require('gulp-less'),
-	browserSync 		= require('browser-sync'),
-	autoprefixer 		= require('gulp-autoprefixer'),
-	imagemin			= require('gulp-imagemin'),
-	concat				= require('gulp-concat'),
-	uglify 				= require('gulp-uglify'),
-	csso 				= require('gulp-csso'),
-	spritesmith			= require('gulp.spritesmith'),
-	gcmq 				= require('gulp-group-css-media-queries'),
-	pug 				= require('gulp-pug'),
-	cleanCSS 			= require('gulp-clean-css'),
-	notify 				= require("gulp-notify");
-
-require('events').EventEmitter.defaultMaxListeners = 0;
-
-gulp.task('default', ['less', 'pug'], function(){
-	//return true;
-});
-
-gulp.task('less', function(){
-	return gulp.src([
-				'src/less/style.less',
-			])
-		.pipe(less())
-		.on("error", notify.onError({
-			message: "Less-Error: <%= error.message %>",
-			title: "Less"
-		}))
-		.pipe(gcmq())
-		.pipe(autoprefixer(['last 10 versions', '> 1%', 'ie 8'], {cascade: true}))
-		.pipe(cleanCSS({compatibility: 'ie8', format: 'keep-breaks'}))
-		.pipe(gulp.dest('build/css'))
-		.pipe(browserSync.reload({ stream: true }));
-});
-
-gulp.task('pug', function(){
-	return gulp.src('src/*.pug')
-		.pipe(pug({
-			pretty: true
-		}))
-		.on("error", notify.onError({
-			message: "Pug-Error: <%= error.message %>",
-			title: "Pug"
-		}))
-		.pipe(gulp.dest('build'))
-		.pipe(browserSync.reload({ stream: true }));
-});
-
-gulp.task('browser-sync', function(){
-	browserSync({
-		server: {
-			baseDir: './build/',
-		},
-		notify: false
-	});
-});
-
-gulp.task('imagemin', function(){
-	return gulp.src('build/img/**/*')
-		.pipe(imagemin({
-			interlaced: true,
-		    progressive: true,
-		    optimizationLevel: 5,
-		    svgoPlugins: [{removeViewBox: true}]
-		}))
-		.pipe(gulp.dest('build/img/'));
-});
-
-gulp.task('imagesprite', function () {
-  return gulp.src('build/img/' + options.sprite + '/*.png')
-  	.pipe(spritesmith({
-  		algorithms: 'binary-tree',
-	    imgName: options.sprite + '.png',
-	    cssFormat: 'css',
-	    cssName: options.sprite + '.css',
-	    imgPath: '/img/' + options.sprite + '.png',
-	    padding: 10,
-	  }))
-	  .pipe(gulp.dest('build/img/'));
-});
-
-gulp.task('jsmin', function() {
-  return gulp.src([
-  		// 'node_modules/jquery/dist/jquery.min.js',
-		'node_modules/slick-carousel/slick/slick.min.js',
-		'node_modules/magnific-popup/dist/jquery.magnific-popup.min.js',
-		'src/libs/**/*.js',
-	])
-    .pipe(concat('libs.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('build/js'));
-});
-
-gulp.task('cssmin', function() {
-  return gulp.src([
-  		'node_modules/magnific-popup/dist/magnific-popup.css',
-  		// '../'+ options.folder +'/src/libs/**/*.css'
-  	])
-    .pipe(concat('libs.min.css'))
-    .pipe(csso())
-    .pipe(gulp.dest('build/css'));
-});
-
-gulp.task('watch', ['pug', 'less', 'browser-sync'], function(){
-	gulp.watch('src/less/**/*.less', ['less']);
-	gulp.watch('src/**/*.pug', ['pug']);
-	//gulp.watch('./build/*.html', browserSync.reload);
-	gulp.watch('build/js/*.js', browserSync.reload);
-});
-
-gulp.task('less-watch', ['less', 'browser-sync'], function(){
-	gulp.watch('src/less/**/*.less', ['less']);
-});
+const { src, dest, parallel, series, watch } = require('gulp');
+const pug             = require('gulp-pug');
+const less            = require('gulp-less');
+const browserSync     = require('browser-sync');
+const autoprefixer    = require('gulp-autoprefixer');
+const imagemin        = require('gulp-imagemin');
+const concat          = require('gulp-concat');
+const uglify          = require('gulp-uglify');
+const csso            = require('gulp-csso');
+const spritesmith     = require('gulp.spritesmith');
+const gcmq            = require('gulp-group-css-media-queries');
+const cleanCSS        = require('gulp-clean-css');
+const notify          = require("gulp-notify");
+const sourcemaps      = require('gulp-sourcemaps');
+const rename          = require('gulp-rename');
 
 
 
-var smartgrid = require('smart-grid');
- 
-/* It's principal settings in smart grid project */
-var settings = {
-    outputStyle: 'less', /* less || scss || sass || styl */
-    columns: 12, /* number of grid columns */
-    offset: "30px", /* gutter width px || % */
-    container: {
-        maxWidth: '1170px', /* max-width оn very large screen */
-        fields: '15px' /* side fields */
-    },
-    breakPoints: {
-        lg: {
-            'width': '1170px', /* -> @media (max-width: 1100px) */
-            'fields': '15px' /* side fields */
-        },
-        md: {
-            'width': '960px',
-            'fields': '15px'
-        },
-        sm: {
-            'width': '780px',
-            'fields': '15px'
-        },
-        xs: {
-            'width': '560px',
-            'fields': '15px'
-        },
-        xxs: {
-            'width': '425px',
-            'fields': '15px'
-        }
-        /* 
-        We can create any quantity of break points.
- 
-        some_name: {
-            some_width: 'Npx',
-            some_offset: 'N(px|%)'
-        }
-        */
-    }
+const options = {
+  folder: '1gulp2',
+  sprite: 'numbers',
 };
 
-gulp.task('smartgrid', function() {
-  return smartgrid('src/less', settings);
-});
- 
+const pathToProject = '../'+ options.folder;
+
+
+//  PUG -> HTML
+function html() {
+  return src(pathToProject+'/build/assets/*.pug')
+    .pipe(pug({
+      pretty: true
+    }))
+    .on("error", notify.onError({
+      message: "Pug-Error: <%= error.message %>",
+      title: "Pug"
+    }))
+    .pipe(dest(pathToProject +'/build'))
+    // .pipe(browserSync.reload({ stream: true }));
+    .on('end', browserSync.reload);
+}
+
+
+//  LESS -> CSS
+function css() {
+  return src(pathToProject +'/build/assets/less/*.less')
+    .pipe(sourcemaps.init())
+      .pipe(less())
+      .on("error", notify.onError({
+        message: "Less-Error: <%= error.message %>",
+        title: "Less"
+      }))
+      .pipe(autoprefixer(['last 5 versions', '> 1%', 'ie 10'], {cascade: true}))
+    .pipe(sourcemaps.write('./'))
+    .pipe(dest(pathToProject +'/build/css'))
+    .pipe(browserSync.reload({ stream: true }));
+}
+
+
+//  COMPRESS style.css
+function cssmin(){
+  return src(pathToProject +'/build/css/style.css')
+    .pipe(less())
+    .on("error", notify.onError({
+      message: "Less-Error: <%= error.message %>",
+      title: "Less"
+    }))
+    .pipe(autoprefixer(['last 5 versions', '> 1%', 'ie 10'], {cascade: true}))
+    .pipe(gcmq())
+    .pipe(cleanCSS({compatibility: 'ie10', format: 'keep-breaks'}))
+    // .pipe(csso())
+    // .pipe(rename('style.min.css'))
+    .pipe(dest(pathToProject +'/build/css'));
+}
+
+
+//  BROWSER-SYNC
+function browserS(){
+  browserSync({
+    server: {
+      baseDir: pathToProject +'/build',
+    },
+    notify: false
+  });
+}
+
+
+//  BUILDING libs.min.js
+function jslibs() {
+  return src([
+      'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/slick-carousel/slick/slick.min.js',
+      'node_modules/lity/dist/lity.min.js',
+      // 'node_modules/imagesloaded/imagesloaded.pkgd.min.js',
+      'node_modules/vanilla-lazyload/dist/lazyload.min.js',
+      pathToProject +'/build/assets/libs/**/*.js',
+    ])
+    .pipe(concat('libs.min.js'))
+    .pipe(uglify())
+    .pipe(dest(pathToProject +'/build/js'));
+}
+
+
+//  BUILDING libs.min.css
+function csslibs(){
+  return src([
+      'node_modules/lity/dist/lity.min.css',
+      pathToProject +'/build/assets/libs/**/*.css',
+    ])
+    .pipe(concat('libs.min.css'))
+    .pipe(csso())
+    .pipe(dest(pathToProject +'/build/css'));
+}
+
+
+//  COMPRESS images
+function imageMin(){
+  src(pathToProject +'/build/img/**/sprite.svg' )
+    .pipe(dest(pathToProject +'/build/imgmin/svg'));
+
+  return src(pathToProject +'/build/img/**/*', {ignore: '/**/sprite.svg'} )
+    .pipe(imagemin({
+      interlaced: true,
+        progressive: true,
+        optimizationLevel: 5,
+        // svgoPlugins: [{removeViewBox: true}]
+    }))
+    .pipe(dest(pathToProject +'/build/imgmin/'));
+}
+
+function imagesprite() {
+  return src(pathToProject +'/build/img/' + options.sprite + '/*.png')
+    .pipe(spritesmith({
+      algorithms: 'binary-tree',
+      imgName: options.sprite + '.png',
+      cssFormat: 'css',
+      cssName: options.sprite + '.css',
+      imgPath: '../img/' + options.sprite + '.png',
+      padding: 10,
+    }))
+    .pipe(dest(pathToProject +'/build/img/'));
+};
+
+
+//  WATCHING files
+function watches(){
+  // csslibs();
+  // jslibs();
+
+  watch(pathToProject+'/build/assets/less/**/*.less', { ignoreInitial: false }, css);
+  watch(pathToProject+'/build/assets/**/*.pug', { ignoreInitial: false }, html);
+  watch(pathToProject+'/build/js/*.js').on('change',  browserSync.reload);
+
+  // browserS();
+}
+
+
+function watchesLess(){
+  // csslibs();
+  // jslibs();
+
+  watch(pathToProject+'/build/assets/less/**/*.less', { ignoreInitial: false }, css);
+  watch(pathToProject+'/build/**/*.html').on('change',  browserSync.reload);
+  watch(pathToProject+'/build/js/*.js').on('change',  browserSync.reload);
+
+  // browserS();
+}
+
+
+
+exports.css = css;
+exports.html = html;
+
+exports.watches = series(parallel(html,css), parallel(watches, browserS));
+exports.watches2 = series(parallel(html,cssmin), parallel(watches, browserS));
+exports.watchesLess = watchesLess;
+
+exports.imagesprite = imagesprite;
+
+exports.imageMin = imageMin;
+exports.cssmin = series(css, cssmin);
+
+exports.csslibs = csslibs;
+exports.jslibs = jslibs;
+
+exports.default = parallel(html, css, jslibs);

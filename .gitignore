@@ -4,3 +4,5 @@ public/PHPMailer
 *.txt
 *.zip
 package-lock.json
+*.lock
+*.phar

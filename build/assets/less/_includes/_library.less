@@ -1,0 +1,196 @@
+
+//Прочее
+.width(@w){
+	width: calc(@w);
+}
+.width100(){
+	width: calc(100% - @offset);
+	// margin-left: @offset / 2;
+	// margin-right: @offset / 2;
+}
+.width50(){
+	width: calc(50% - @offset);
+	// margin-left: @offset / 2;
+	// margin-right: @offset / 2;
+}
+
+
+.positionFull(){
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+//for retina
+.retina(@rules){
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+		@rules();
+	}
+}
+
+
+.lg(@rules) {
+  @media screen and (max-width: (@w-lg - 1px)) { @rules(); }
+}
+.md(@rules) {
+  @media screen and (max-width: (@w-md - 1px)) { @rules(); }
+}
+.sm(@rules) {
+  @media screen and (max-width: (@w-sm - 1px)) { @rules(); }
+}
+.xs(@rules) {
+  @media screen and (max-width: (@w-xs - 1px)) { @rules(); }
+}
+.xxs(@rules) {
+  @media screen and (max-width: (@w-xxs - 1px)) { @rules(); }
+}
+
+.xs-sm(@rules) {
+  @media screen and (min-width: @w-xs) and (max-width: (@w-sm - 1px)) { @rules(); }
+}
+.xs-md(@rules) {
+  @media screen and (min-width: @w-xs) and (max-width: (@w-md - 1px)) { @rules(); }
+}
+.xs-lg(@rules) {
+  @media screen and (min-width: @w-xs) and (max-width: (@w-lg - 1px)) { @rules(); }
+}
+.sm-md(@rules) {
+  @media screen and (min-width: @w-sm) and (max-width: (@w-md - 1px)) { @rules(); }
+}
+.sm-lg(@rules) {
+  @media screen and (min-width: @w-sm) and (max-width: (@w-lg - 1px)) { @rules(); }
+}
+.md-lg(@rules) {
+  @media screen and (min-width: @w-md) and (max-width: (@w-lg - 1px)) { @rules(); }
+}
+
+.lg-min(@rules) {
+  @media screen and (min-width: @w-lg) { @rules(); }
+}
+.md-min(@rules) {
+  @media screen and (min-width: @w-md) { @rules(); }
+}
+.sm-min(@rules) {
+  @media screen and (min-width: @w-sm) { @rules(); }
+}
+.xs-min(@rules) {
+  @media screen and (min-width: @w-xs) { @rules(); }
+}
+.xxs-min(@rules) {
+  @media screen and (min-width: @w-xxs) { @rules(); }
+}
+
+
+//fonts
+.font(@alias, @name, @weight: 400, @style: normal){
+	@font-face{
+		font-family: @alias;
+		src: url('../fonts/@{name}.eot');
+		src: local('☺'), url('../fonts/@{name}.woff') format('woff'), url('../fonts/@{name}.otf') format('otf'), url('../fonts/@{name}.ttf') format('truetype'), url('../fonts/@{name}.svg') format('svg');
+		font-weight: @weight;
+		font-style: @style;
+    font-display: swap;
+	}
+}
+
+
+//Уголки
+.arrow(@width, @height, @bg, @direction){
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+
+	& when (@direction = t){
+		border-width: 0 @width/2 @height @width/2;
+		border-color: transparent transparent @bg transparent;
+	}
+	& when (@direction = r){
+		border-width: @height/2 0 @height/2 @width;
+		border-color: transparent transparent transparent @bg;
+	}
+	& when (@direction = b){
+		border-width: @height @width/2 0 @width/2;
+		border-color: @bg transparent transparent transparent;
+	}
+	& when (@direction = l){
+		border-width: @height/2 @width @height/2 0;
+		border-color: transparent @bg transparent transparent;
+	}
+	& when (@direction = tl){
+		border-width: @height @width 0 0;
+		border-color: @bg transparent transparent transparent;
+	}
+	& when (@direction = tr){
+		border-width: 0 @width @height 0;
+		border-color: transparent @bg transparent transparent;
+	}
+	& when (@direction = br){
+		border-width: 0 0 @height @width;
+		border-color: transparent transparent @bg transparent;
+	}
+	& when (@direction = bl){
+		border-width: @height 0 0 @width;
+		border-color: transparent transparent transparent @bg;
+	}		
+}
+
+.reset(){
+  body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,input,textarea,p,blockquote,th,td{
+      margin: 0;
+      padding: 0;
+  }
+  table{
+      border-collapse: collapse;
+      border-spacing: 0;
+  }
+  fieldset,img,abbr{
+      border: 0;
+  }
+  address,caption,cite,code,dfn,em,strong,th,var{
+      font-style: normal;
+      font-weight: normal;
+  }
+  ul li{
+      list-style: none;
+  }
+  caption,th{
+      text-align: left;
+  }
+  h1,h2,h3,h4,h5,h6{
+      font-size: 100%;
+      font-weight: normal;
+  }
+  sup{
+      vertical-align: text-top;
+  }
+  sub{
+      vertical-align: text-bottom;
+  }
+  input,textarea,select{
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+  }
+  legend{
+      color: @color1;
+  }
+  article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,main{
+      display: block;
+  }
+  img{
+      max-width: 100%;
+  }
+}
+
+.clearfix(){
+  &::after{
+    display: table;
+    content: "";
+    clear: both;
+  }
+}
+	

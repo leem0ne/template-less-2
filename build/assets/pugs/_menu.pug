@@ -1,0 +1,12 @@
+- 
+	var menus = [
+		{name:'Link1', href:'#here1'},
+		{name:'Link2', href:'#here2'}, 
+		{name:'Link3', href:'#here3'}, 
+		{name:'Link4', href:'#here4'}
+	];
+	
+ul.menu
+	for menu in menus
+		li.menu__item
+			a.menu__link.js-scroll-to(href=menu.href) #{menu.name}
